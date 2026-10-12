@@ -14,7 +14,8 @@ export function split(amount, people) {
   }
   const cents = Math.round(amount * 100);
   const share = Math.floor(cents / people);
-  return Array.from({ length: people }, () => share / 100);
+  const remainder = cents % people;
+  return Array.from({ length: people }, (_, i) => (share + (i < remainder ? 1 : 0)) / 100);
 }
 
 /** Format a dollar value for display. */
